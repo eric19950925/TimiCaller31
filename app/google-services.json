@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "615340332435",
+    "firebase_url": "https://timicaller1212.firebaseio.com",
+    "project_id": "timicaller1212",
+    "storage_bucket": "timicaller1212.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615340332435:android:e91f54deb1c9c0a1",
+        "android_client_info": {
+          "package_name": "com.eric.timicaller31"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615340332435-ohjnn4djehk9pqrd3ifq4je9jj6prnu4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eric.timicaller31",
+            "certificate_hash": "0b76636730cfdbd2db2c4cf1aa15fccc482f2bd3"
+          }
+        },
+        {
+          "client_id": "615340332435-ibh0vaj1ok1qlr6hbjluh72jnbqsn5ls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBukWm2B7wpnLwgOFv2-wwTEi0CiVv6B7s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615340332435-ibh0vaj1ok1qlr6hbjluh72jnbqsn5ls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
