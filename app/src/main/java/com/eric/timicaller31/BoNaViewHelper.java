@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
-import com.eric.timicaller31.Setting.SettingActivity;
+import com.eric.timicaller31.Info.InfoActivity;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class BoNaViewHelper {
@@ -25,17 +25,25 @@ public class BoNaViewHelper {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()){
-                    case R.id.ic_set:
-                        Intent intent1 = new Intent(c,SettingActivity.class);
+                    case R.id.ic_start:
+                        Intent intent1 = new Intent(c,DailyEventsActivity.class);
                         c.startActivity(intent1);
                         break;
-                    case R.id.ic_event:
-                        Intent intent2 = new Intent(c,MainActivity.class);
+                    case R.id.ic_weekly_plan:
+                        Intent intent2 = new Intent(c,WeeklyPlanActivity.class);
                         c.startActivity(intent2);
                         break;
-                    case R.id.ic_cloud:
-                        Intent intent3 = new Intent(c,DownloadActivity.class);
+                    case R.id.ic_favorite:
+                        Intent intent3 = new Intent(c,FavoriteRoomActivity.class);
                         c.startActivity(intent3);
+                        break;
+                    case R.id.ic_myroom:
+                        Intent intent4 = new Intent(c,BuildMyRoomActivity.class);
+                        c.startActivity(intent4);
+                        break;
+                    case R.id.ic_ad:
+                        Intent intent5 = new Intent(c,ADRoomsActivity.class);
+                        c.startActivity(intent5);
                         break;
                 }
                 return false;

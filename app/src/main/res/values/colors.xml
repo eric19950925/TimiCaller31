@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="gray">#bfbfbf</color>
     <color name="white">#ffffff</color>
+    <color name="pink">#f952b1</color>
+    <color name="cashblue">#66ccf4</color>
+    <color name="purple">#8a5fe8</color>
+    <color name="yellow">#ffc700</color>
 </resources>

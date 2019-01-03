@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eric.timicaller31">
-
+    <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="barcode"/>
+    <!-- To access Google+ APIs: -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -11,29 +17,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".DailyEventsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FavoriteRoomActivity" />
+        <activity android:name=".Info.InfoActivity" />
 
-        <activity android:name=".DownloadActivity" />
-        <activity android:name=".Setting.SettingActivity" />
-        <activity android:name=".MyEvent.AddNewAlarm" />
+        <receiver android:name=".DailyEvents.AlarmReceiver" />
 
-        <receiver android:name=".MyEvent.AlarmReceiver" />
-
-        <activity android:name=".MyEvent.RingActivity" />
-        <activity android:name=".MyEvent.Edit_MyAlarmActivity" />
-        <activity android:name=".MyEvent.Detail_MyAlarmActivity" />
-        <activity android:name=".MyTimer.AddNewTimerActivity" />
-        <activity android:name=".UploadRoom.AddNewRoomActivity" />
-        <activity android:name=".UploadRoom.URoomActivity" />
-        <activity android:name=".UploadRoom.AddNewUEvent" />
-        <activity android:name=".DownloadRoom.DRoomActivity" />
-        <activity android:name=".DownloadRoom.IntoNewRoomActivity"></activity>
+        <activity android:name=".DailyEvents.RingActivity" />
+        <activity android:name=".VisitRoomActivity" />
+        <activity android:name=".BuildMyRoom.Detail_UEventActivity" />
+        <activity android:name=".DailyEvents.Edit_MyAlarmActivity" />
+        <activity android:name=".DailyEvents.Detail_MyAlarmActivity" />
+        <activity android:name=".BuildMyRoom.URoomActivity" />
+        <activity android:name=".URCRoomActivity" />
+        <activity android:name=".ADRoomsActivity" />
+        <activity android:name=".WeeklyPlanActivity" />
+        <activity android:name=".BuildMyRoomActivity" />
+        <activity android:name=".NewAlarmActivity" />
+        <activity android:name=".NewTimerActivity" />
+        <activity android:name=".NewRCActivity" />
+        <activity android:name=".NewGXActivity" />
+        <activity android:name=".QRSActivity"></activity>
+        <activity android:name=".QRS_RCActivity"></activity>
     </application>
 
 </manifest>

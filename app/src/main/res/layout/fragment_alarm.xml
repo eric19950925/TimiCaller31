@@ -8,8 +8,8 @@
 
     <!--<include-->
         <!--android:id="@+id/include2"-->
-        <!--layout="@layout/content_myalarm" />-->
-    <include layout="@layout/content_myalarm" />
+        <!--layout="@layout/content_myshow1" />-->
+    <include layout="@layout/content_myshow1" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

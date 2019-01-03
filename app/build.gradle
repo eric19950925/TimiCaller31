@@ -5,7 +5,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.eric.timicaller31"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -42,8 +42,17 @@ dependencies {
     // Required only if Facebook login support is required
     // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94
     implementation 'com.facebook.android:facebook-android-sdk:4.39.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.google.android.gms:play-services-plus:16.0.0'
+    //camerasource
+    implementation 'com.google.android.gms:play-services-vision:10.0.0'
 
 
+    //for QR CODE scanner
+    implementation 'com.google.android.gms:play-services-auth:16.0.0'
+    implementation 'me.dm7.barcodescanner:zxing:1.9'
+    //產生qr code
+    implementation 'com.google.zxing:core:3.3.3'
 
 }
 apply plugin: 'com.google.gms.google-services'
