@@ -212,15 +212,15 @@ public class URCRoomActivity extends AppCompatActivity implements ValueEventList
                                 .child(edrk).child("num").setValue(rcroomTitle1);
                         Log.d(TAG, "onDataChange: " + rcroomTitle1);
 
+                        Intent toURoom = new Intent(URCRoomActivity.this, URCRoomActivity.class);
+                        toURoom.putExtra("ROOM_KEY",edrk);
+                        toURoom.putExtra("ROOM_NUM",rcroomTitle1);
+                        startActivity(toURoom);
 
 
                     }
                 }).setNeutralButton("Cancel", null).show();
 
-        Intent toURoom = new Intent(URCRoomActivity.this, URCRoomActivity.class);
-        toURoom.putExtra("ROOM_KEY",edrk);
-        toURoom.putExtra("ROOM_NUM",edrn);
-        startActivity(toURoom);
     }
 
 

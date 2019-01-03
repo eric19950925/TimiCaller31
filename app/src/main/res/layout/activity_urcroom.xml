@@ -5,71 +5,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BuildMyRoom.URoomActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/relLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="33dp"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <include
-            layout="@layout/my_tab"
+        <RelativeLayout
+            android:id="@+id/relLayout1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="33dp"
+            tools:layout_editor_absoluteY="0dp">
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/relLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            <include
+                layout="@layout/my_tab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        <include
-            layout="@layout/content_uroom"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relLayout2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="27dp"
-            android:layout_marginBottom="73dp"
-            android:onClick="back"
-            android:text="back" />
+            <include
+                layout="@layout/content_uroom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
-        <Button
-            android:id="@+id/button14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/button12"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="166dp"
-            android:layout_marginBottom="73dp"
-            android:layout_toEndOf="@+id/button12"
-            android:onClick="check"
-            android:text="CHECK" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/button12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="11dp"
+                android:layout_marginBottom="73dp"
+                android:onClick="back"
+                android:text="back" />
+
+            <Button
+                android:id="@+id/button14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/button12"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="163dp"
+                android:layout_marginBottom="73dp"
+                android:layout_toEndOf="@+id/button12"
+                android:onClick="check"
+                android:text="CHECK" />
+        </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
@@ -109,6 +114,6 @@
             app:layout_constraintTop_toTopOf="@+id/fab"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/icon_qrcode" />
-    <!--<include layout="@layout/bottom"/>-->
+        <!--<include layout="@layout/bottom"/>-->
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
