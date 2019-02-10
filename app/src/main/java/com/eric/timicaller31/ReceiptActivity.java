@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,86 +19,84 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.eric.timicaller31.BuildMyRoom.URoomActivity;
 import com.eric.timicaller31.ObjectClass.Room;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-public class BuildMyRoomActivity extends AppCompatActivity {
-    private static final String TAG = BuildMyRoomActivity.class.getSimpleName();
-    private Context mContext = BuildMyRoomActivity.this;
-    private static final int ACTIVITY_NUM = 2;
-    private RecyclerView recyclerView;
-    private String userid;
-    private FirebaseUser user;
-    private FirebaseRecyclerAdapter<Room, URoomHolder> adapter;
+public class ReceiptActivity extends AppCompatActivity {
+    private Context mContext = ReceiptActivity.this;
+    private static final int ACTIVITY_NUM = 3;
+    String userid;
+    RecyclerView recyclerView2;
+    private FirebaseRecyclerAdapter<Room, URoomHolder> adapter2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_build_my_room);
+        setContentView(R.layout.activity_receipt);
         setBoNaView();
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tab);
-        tabLayout.addTab(tabLayout.newTab().setText("公佈欄管理"));
+        tabLayout.addTab(tabLayout.newTab().setText("發票存摺"));
         userid = this.getSharedPreferences("Timi", Context.MODE_PRIVATE)
                 .getString("USERID", "");
-        Log.d(TAG, "onCreateView: "+userid);
-
-        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final EditText ed_title = new EditText(BuildMyRoomActivity.this);
-                new AlertDialog.Builder(BuildMyRoomActivity.this).setTitle("Room title")
+                final EditText ed_title = new EditText(ReceiptActivity.this);
+                new AlertDialog.Builder(ReceiptActivity.this).setTitle("Add Receipt Room")
                         .setView(ed_title)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                String roomTitle = ed_title.getText().toString();
-                                DatabaseReference roomRef = FirebaseDatabase.getInstance().getReference("rooms").push();
+                                String rcroomTitle = ed_title.getText().toString();
+                                DatabaseReference rcroomRef = FirebaseDatabase.getInstance().getReference("rcrooms").push();
                                 Room room = new Room();
-                                room.setTitle(roomTitle);
+                                room.setTitle(rcroomTitle);
                                 room.setId(userid);
-                                roomRef.setValue(room);
-                                String key = roomRef.getKey();
+//                                                        room.setNum("");
+                                rcroomRef.setValue(room);
+                                String key = rcroomRef.getKey();
                                 room.setKey(key);
-                                roomRef.child("key").setValue(key);
+                                rcroomRef.child("key").setValue(key);
 
 
                             }
                         }).setNeutralButton("Cancel", null).show();
+
             }
         });
-        recyclerView = findViewById(R.id.recycler);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(BuildMyRoomActivity.this));
-        recyclerView.getItemAnimator().setRemoveDuration(1000);
-        Query query = FirebaseDatabase.getInstance().getReference("rooms").orderByKey();
+        recyclerView2 = findViewById(R.id.recycler);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(ReceiptActivity.this));
+        recyclerView2.getItemAnimator().setRemoveDuration(1000);
+        Query query = FirebaseDatabase.getInstance().getReference("rcrooms").orderByKey();
         FirebaseRecyclerOptions<Room> options = new FirebaseRecyclerOptions.Builder<Room>()
                 .setQuery(query, Room.class).build();
-        adapter = new FirebaseRecyclerAdapter<Room, URoomHolder>(options) {
+        adapter2 = new FirebaseRecyclerAdapter<Room, ReceiptActivity.URoomHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull URoomHolder holder, int position, @NonNull final Room model) {
 //                String title = model.getTitle();
 //                Log.d(TAG, "onBindViewHolder: "+title);
                 final String room_key = model.getKey();
                 holder.title.setText(model.getTitle());
+
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent into_uroom = new Intent(getApplicationContext(),URoomActivity.class);
-                        into_uroom.putExtra("ROOM_KEY",room_key);
-                        into_uroom.putExtra("ROOM_NAME",model.getTitle());
+                        Intent into_uroom = new Intent(getApplicationContext(), URCRoomActivity.class);
+                        into_uroom.putExtra("ROOM_KEY", room_key);
+                        into_uroom.putExtra("ROOM_NUM", model.getNum());
+                        into_uroom.putExtra("ROOM_NAME", model.getTitle());
                         startActivity(into_uroom);
                     }
                 });
                 holder.delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(BuildMyRoomActivity.this);
+                        android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(ReceiptActivity.this);
                         alertDialogBuilder.setTitle("Delete this room?");
                         alertDialogBuilder
                                 .setMessage("Click yes to delete!")
@@ -107,7 +104,7 @@ public class BuildMyRoomActivity extends AppCompatActivity {
                                 .setPositiveButton("Yes",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                                DatabaseReference roomRef1 = FirebaseDatabase.getInstance().getReference("rooms");
+                                                DatabaseReference roomRef1 = FirebaseDatabase.getInstance().getReference("rcrooms");
 
                                                 roomRef1.child(model.getKey()).removeValue();
                                             }
@@ -124,50 +121,51 @@ public class BuildMyRoomActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                 });
+
             }
 
             @NonNull
             @Override
-            public URoomHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = getLayoutInflater().inflate(R.layout.item_uroom,viewGroup,false);
+            public ReceiptActivity.URoomHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = getLayoutInflater().inflate(R.layout.item_uroom, viewGroup, false);
                 return new URoomHolder(view);
-
             }
         };
-        recyclerView.setAdapter(adapter);
+                recyclerView2.setAdapter(adapter2);
 
-
-    }
-    public class URoomHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        ImageView delete;
-        public URoomHolder(@NonNull View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.tv_name);
-            delete = itemView.findViewById(R.id.del);
         }
+
+        public class URoomHolder extends RecyclerView.ViewHolder {
+            TextView title;
+            ImageView delete;
+
+
+            public URoomHolder(@NonNull View itemView) {
+                super(itemView);
+                title = itemView.findViewById(R.id.tv_name);
+                delete = itemView.findViewById(R.id.del);
+
+            }
+        }
+        @Override
+        public void onStart() {
+            super.onStart();
+            adapter2.startListening();
+        }
+
+        @Override
+        public void onStop() {
+            super.onStop();
+            adapter2.stopListening();
+        }
+        private void setBoNaView () {
+
+            BottomNavigationViewEx b = (BottomNavigationViewEx) findViewById(R.id.bar);
+            BoNaViewHelper.setBoNaView(b);
+            BoNaViewHelper.enableNavigation(mContext, b);
+            Menu menu = b.getMenu();
+            MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+            menuItem.setChecked(true);
+        }
+
     }
-
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
-    private void setBoNaView(){
-
-        BottomNavigationViewEx b = (BottomNavigationViewEx)findViewById(R.id.bar);
-        BoNaViewHelper.setBoNaView(b);
-        BoNaViewHelper.enableNavigation(mContext,b);
-        Menu menu = b.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);
-    }
-}

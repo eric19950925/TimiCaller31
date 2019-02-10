@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,7 +50,7 @@ import java.util.Map;
 
 public class URCRoomActivity extends AppCompatActivity implements ValueEventListener {
     private static final String TAG = URCRoomActivity.class.getSimpleName();
-    String edrk,edrn;
+    String edrk,edrn,edname;
     String name;
 
     private RecyclerView recyclerView;
@@ -68,7 +69,9 @@ public class URCRoomActivity extends AppCompatActivity implements ValueEventList
         Intent intent = getIntent();
         edrk = intent.getStringExtra("ROOM_KEY");
         edrn = intent.getStringExtra("ROOM_NUM");
-
+        edname = intent.getStringExtra("ROOM_NAME");
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tab);
+        tabLayout.addTab(tabLayout.newTab().setText(edname));
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +199,7 @@ public class URCRoomActivity extends AppCompatActivity implements ValueEventList
 
     public void back(View view){
 
-        Intent toBRoom = new Intent(this, FavoriteRoomActivity.class);
+        Intent toBRoom = new Intent(this, ReceiptActivity.class);
 //        toURoom.putExtra("ROOM_KEY",edrk);
         startActivity(toBRoom);
     }

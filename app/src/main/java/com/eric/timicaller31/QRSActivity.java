@@ -176,6 +176,7 @@ public class QRSActivity extends AppCompatActivity implements ZXingScannerView.R
 
                 Intent vr = new Intent(QRSActivity.this, VisitRoomActivity.class);
                 vr.putExtra("ROOM_KEY",room01.getKey());
+                vr.putExtra("ROOM_NAME",room01.getTitle());
                 startActivity(vr);
             }
         });

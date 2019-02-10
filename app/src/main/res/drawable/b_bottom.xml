@@ -16,7 +16,7 @@
                 android:color="@color/gray"/>
             <!--填滿-->
             <solid
-                android:color="@color/white"/>
+                android:color="@color/white" />
         </shape>
     </item>
 

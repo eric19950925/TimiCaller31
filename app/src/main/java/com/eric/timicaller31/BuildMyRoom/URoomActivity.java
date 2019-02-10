@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,7 +39,7 @@ import java.util.Map;
 
 public class URoomActivity extends AppCompatActivity {
     private static final String TAG = URoomActivity.class.getSimpleName();
-    String edrk;
+    String edrk,edname;
     String name;
 
     private RecyclerView recyclerView;
@@ -54,7 +55,9 @@ public class URoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_uroom);
         Intent intent = getIntent();
         edrk = intent.getStringExtra("ROOM_KEY");
-
+        edname = intent.getStringExtra("ROOM_NAME");
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tab);
+        tabLayout.addTab(tabLayout.newTab().setText(edname));
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         qrcode();
 

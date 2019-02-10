@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
-import com.eric.timicaller31.Info.InfoActivity;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class BoNaViewHelper {
@@ -29,10 +28,10 @@ public class BoNaViewHelper {
                         Intent intent1 = new Intent(c,DailyEventsActivity.class);
                         c.startActivity(intent1);
                         break;
-                    case R.id.ic_weekly_plan:
-                        Intent intent2 = new Intent(c,WeeklyPlanActivity.class);
-                        c.startActivity(intent2);
-                        break;
+//                    case R.id.ic_weekly_plan:
+//                        Intent intent2 = new Intent(c,WeeklyPlanActivity.class);
+//                        c.startActivity(intent2);
+//                        break;
                     case R.id.ic_favorite:
                         Intent intent3 = new Intent(c,FavoriteRoomActivity.class);
                         c.startActivity(intent3);
@@ -41,8 +40,8 @@ public class BoNaViewHelper {
                         Intent intent4 = new Intent(c,BuildMyRoomActivity.class);
                         c.startActivity(intent4);
                         break;
-                    case R.id.ic_ad:
-                        Intent intent5 = new Intent(c,ADRoomsActivity.class);
+                    case R.id.ic_rc:
+                        Intent intent5 = new Intent(c,ReceiptActivity.class);
                         c.startActivity(intent5);
                         break;
                 }

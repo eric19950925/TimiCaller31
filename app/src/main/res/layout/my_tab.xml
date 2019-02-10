@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<merge xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
     <RelativeLayout
@@ -9,11 +9,14 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <android.support.design.widget.TabLayout
+                android:id="@+id/tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/b_bottom"
-                android:id="@+id/tab">
+                app:tabTextAppearance="@android:style/TextAppearance.Large"
+                app:tabTextColor="@color/browser_actions_text_color">
 
             </android.support.design.widget.TabLayout>
         </android.support.design.widget.AppBarLayout>

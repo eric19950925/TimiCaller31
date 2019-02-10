@@ -31,6 +31,7 @@ public class Detail_UEventActivity extends AppCompatActivity {
     ImageView imageView;
     private EventHelper eventHelper;
     private Button btn ,btnb;
+    private String edrname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class Detail_UEventActivity extends AppCompatActivity {
         edmonth = intent.getIntExtra("MNOTH",0);
         eddate = intent.getIntExtra("DATE",0);
         edrk = intent.getStringExtra("ROOM_KEY");
+        edrname = intent.getStringExtra("ROOM_NAME");
         edek = intent.getStringExtra("EVENT_KEY");
         edverid = intent.getStringExtra("VER_ID");
         if (intent.hasExtra("IMAGE")) {
@@ -149,6 +151,7 @@ public class Detail_UEventActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent b = new Intent(Detail_UEventActivity.this, VisitRoomActivity.class);
                     b.putExtra("ROOM_KEY", edrk);
+                    b.putExtra("ROOM_NAME", edrname);
                     startActivity(b);
                 }
             });

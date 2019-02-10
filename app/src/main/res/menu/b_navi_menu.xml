@@ -6,10 +6,10 @@
         android:icon="@drawable/icons8_coffee_to_go"
 
         android:title="Start"></item>
-    <item
-        android:id="@+id/ic_weekly_plan"
-        android:icon="@drawable/icons8_walking"
-        android:title="Plan"></item>
+    <!--<item-->
+        <!--android:id="@+id/ic_weekly_plan"-->
+        <!--android:icon="@drawable/icons8_walking"-->
+        <!--android:title="Plan"></item>-->
     <item
         android:id="@+id/ic_favorite"
         android:icon="@drawable/icons8_two_hearts"
@@ -17,9 +17,9 @@
     <item
         android:id="@+id/ic_myroom"
         android:icon="@drawable/icons8_room"
-        android:title="My Room"></item>
+        android:title="My Billboard"></item>
     <item
-        android:id="@+id/ic_ad"
-        android:icon="@drawable/icons8_globe"
-        android:title="Adventure"></item>
+        android:id="@+id/ic_rc"
+        android:icon="@drawable/icons8_check_500"
+        android:title="Receipt"></item>
 </menu>

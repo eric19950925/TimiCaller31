@@ -22,6 +22,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -50,6 +51,7 @@ public class NewAlarmActivity extends AppCompatActivity {
 private static final int REQUEST_GALLARY = 6;
     private static final int REQUEST_CAMERA = 7;
     private static final String IMAGE_DIRECTORY = "/demonuts";
+    private static final String TAG = NewAlarmActivity.class.getSimpleName();
     private int GALLERY = 1, CAMERA = 2;
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
@@ -287,6 +289,7 @@ private static final int REQUEST_GALLARY = 6;
         Bitmap image = ((BitmapDrawable)imageview.getDrawable()).getBitmap();
         image.compress(Bitmap.CompressFormat.PNG, 100, out);
         byte[] bArray = out.toByteArray();
+        Log.d(TAG, "save: "+bArray.length);
 
 
 

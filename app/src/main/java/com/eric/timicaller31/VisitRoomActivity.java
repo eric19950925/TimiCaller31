@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,7 +47,7 @@ import java.util.Map;
 
 public class VisitRoomActivity extends AppCompatActivity implements ValueEventListener {
     private static final String TAG = VisitRoomActivity.class.getSimpleName();
-    String edrk;
+    String edrk,edname;
     String name;
     Room room01;
     private RecyclerView recyclerView;
@@ -64,7 +65,9 @@ public class VisitRoomActivity extends AppCompatActivity implements ValueEventLi
         setContentView(R.layout.activity_vroom);
         Intent intent = getIntent();
         edrk = intent.getStringExtra("ROOM_KEY");
-
+        edname = intent.getStringExtra("ROOM_NAME");
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tab);
+        tabLayout.addTab(tabLayout.newTab().setText(edname));
 //        userid = getSharedPreferences("Timi", MODE_PRIVATE)
 //                .getString("USERID", null);
 //        Log.d(TAG, "onCreate: " + userid);
@@ -92,6 +95,7 @@ public class VisitRoomActivity extends AppCompatActivity implements ValueEventLi
                         todetails.putExtra("PHONE", "");
                         todetails.putExtra("ROOM_KEY", edrk);
                         todetails.putExtra("VER_ID", "visiter");
+                        todetails.putExtra("ROOM_NAME", edname);
 
 //                        todetails.putExtra("IMAGE", imagearray);
                         startActivity(todetails);
