@@ -167,7 +167,7 @@ public class DailyEventsActivity extends AppCompatActivity implements FirebaseAu
             public void onClick(View view) {
                 //get location
                 opc=getSharedPreferences("Timi", MODE_PRIVATE)
-                        .getInt("OPC", 0);
+                        .getInt("OPC", 1);
                 Toast.makeText(mContext, "opc="+opc, Toast.LENGTH_LONG).show();
 
                 LocationManager status = (LocationManager) (mContext.getSystemService(Context.LOCATION_SERVICE));
@@ -219,6 +219,7 @@ public class DailyEventsActivity extends AppCompatActivity implements FirebaseAu
                             }
                             else{
                                 Toast.makeText(mContext, "尚未開啟位置追蹤系統", Toast.LENGTH_LONG).show();
+                                cancelJob();
                             }
                         }
                     }).show();

@@ -28,7 +28,7 @@ public class ExampleJobService extends JobService{
     private static final String TAG = "ExampleJobService";
     private boolean jobCancelled = false;
     private LocationManager lms;
-    private String bestProvider = LocationManager.GPS_PROVIDER;    //最佳資訊提供者
+    private String bestProvider;    //最佳資訊提供者
 
     private static final int REQUEST_ACCESS_FINE_LOCATION = 8;
     private static final int REQUEST_ACCESS_COARSE_LOCATION = 11;
@@ -40,13 +40,10 @@ public class ExampleJobService extends JobService{
     private String ipAddress;
     private String userid;
 
-    private Looper myloop;
+
     private double latitude;
     private double longitude;
-    private Handler mainHandler;
     private Looper mloop;
-    private LocationManager locationManager;
-    private LocationListener locationListener;
     private MyLocationListener myLocationListener;
     private HandlerThread handlerThread;
 
@@ -64,24 +61,21 @@ public class ExampleJobService extends JobService{
         new Thread(new Runnable() {
             @Override
             public void run() {
-//                LocationService mloca=new LocationService(ExampleJobService.this);
-//                latitude=mloca.getLatitude();
-//                longitude=mloca.getLongitude();
+
                 Log.d(TAG, "get1 = "+latitude+"+"+longitude);
                 int i = 1;
                 while( i==1 ){
-                    locationServiceInitial();
-//                    upload(String.valueOf(longitude),String.valueOf(latitude),"5");
-//                    Log.d(TAG, "UPLOAD = "+latitude+"+"+longitude);
-                    if (jobCancelled) {//超重要別漏掉
+
+                    if (jobCancelled) {//超重要別漏掉別擺錯位置
                         return;
                     }
+
+                    locationServiceInitial();
+
 //                    upload("122", "25", "5");
-//                    String get = locationServiceInitial();
-//                    Log.d(TAG, "get ="+get);
+
 //                    Intent serviceIntent = new Intent(ExampleJobService.this, NotiService.class);
 //                    serviceIntent.putExtra("inputExtra", "抓取位置資訊");
-//
 //                    ContextCompat.startForegroundService(ExampleJobService.this, serviceIntent);
 
                     try {
@@ -178,7 +172,7 @@ public class ExampleJobService extends JobService{
         else{
 //            Toast.makeText(this, "資源讀取中...", Toast.LENGTH_LONG).show();
             lms = (LocationManager) getSystemService(LOCATION_SERVICE);	//取得系統定位服務
-//            locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+
             Criteria criteria = new Criteria();	//資訊提供者選取標準
             bestProvider = lms.getBestProvider(criteria, true);	//選擇精準度最高的提供者
             myLocationListener = new MyLocationListener();
@@ -197,7 +191,7 @@ public class ExampleJobService extends JobService{
             lms.requestSingleUpdate("network", myLocationListener,mloop);
 
 //            lms.requestLocationUpdates("network", 0, 0, myLocationListener,mloop);
-//            locationManager.requestLocationUpdates("network", 0, 0, locationListener);
+
 //            lms.removeUpdates(myLocationListener);
 //            Looper.myLooper().quit();
 //            mloop.quit();
@@ -205,8 +199,8 @@ public class ExampleJobService extends JobService{
 //            mloop =Looper.myLooper();
 //            mloop=null;
 //            Log.d(TAG, "mloop:"+mloop);
-
 //            mloop.quit();
+
             Log.d(TAG, "ready to sleep");
 
 //            lms.removeUpdates(myLocationListener);
@@ -236,10 +230,10 @@ public class ExampleJobService extends JobService{
 //            });
 //           Toast.makeText(DailyEventsActivity.this, "準備顯示選單", Toast.LENGTH_LONG).show();
 
-            upload(String.valueOf(longitude),String.valueOf(latitude),"7");
-//            mloop.quit();
-
-
+            upload(String.valueOf(longitude),String.valueOf(latitude),"5");
+            lms.removeUpdates(myLocationListener);
+            mloop.quitSafely();
+            handlerThread.quitSafely();
         }
 
         @Override
