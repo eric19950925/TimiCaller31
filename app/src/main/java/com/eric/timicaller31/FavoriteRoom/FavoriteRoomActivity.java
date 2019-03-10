@@ -1,45 +1,31 @@
-package com.eric.timicaller31;
+package com.eric.timicaller31.FavoriteRoom;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.eric.timicaller31.BoNaViewHelper;
 import com.eric.timicaller31.DailyEvents.EventHelper;
-import com.eric.timicaller31.ObjectClass.Room;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+import com.eric.timicaller31.R;
+import com.eric.timicaller31.DailyEvents.VisitRoomActivity;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FavoriteRoomActivity extends AppCompatActivity {
 private static final int ACTIVITY_NUM = 1;
 private Context mContext = FavoriteRoomActivity.this;
-    String userid;
+    String userid,rbid;
     RecyclerView recyclerView1,recyclerView2,recyclerView3;
     private FRoomAdapter adapter1;
     private EventHelper helper;
@@ -53,6 +39,7 @@ private Context mContext = FavoriteRoomActivity.this;
         userid = this.getSharedPreferences("Timi", Context.MODE_PRIVATE)
                 .getString("USERID", "");
 //        Log.d(TAG, "onCreateView: "+userid);
+
         helper = new EventHelper(this);
         Cursor cursor = helper.getReadableDatabase()
                 .query("FAVORITE_ROOM",null,null,null,null,null,null);
@@ -85,7 +72,7 @@ private Context mContext = FavoriteRoomActivity.this;
         @NonNull
         @Override
         public FRoomHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = getLayoutInflater().inflate(R.layout.item_uroom,parent,false);
+            View view = getLayoutInflater().inflate(R.layout.item_buroom,parent,false);
             return new FRoomHolder(view);
         }
 
@@ -106,6 +93,7 @@ private Context mContext = FavoriteRoomActivity.this;
                     Intent vr = new Intent(FavoriteRoomActivity.this, VisitRoomActivity.class);
                     vr.putExtra("ROOM_KEY",cursor.getString(cursor.getColumnIndex("COL_KEY")));
                     vr.putExtra("ROOM_NAME",cursor.getString(cursor.getColumnIndex("COL_NAME")));
+                    vr.putExtra("ROOM_BUILDERID",cursor.getString(cursor.getColumnIndex("COL_BUILDER_NAME")));
                     startActivity(vr);
                 }
             });

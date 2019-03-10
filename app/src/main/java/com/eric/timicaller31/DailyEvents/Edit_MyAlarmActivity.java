@@ -2,6 +2,8 @@ package com.eric.timicaller31.DailyEvents;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,13 +22,18 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.eric.timicaller31.DailyEventsActivity;
+import com.eric.timicaller31.BuildMyRoom.URoomActivity;
+import com.eric.timicaller31.ObjectClass.Event01;
 import com.eric.timicaller31.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -37,38 +44,59 @@ public class Edit_MyAlarmActivity extends AppCompatActivity {
     private static final String IMAGE_DIRECTORY = "/demonuts";
     private int GALLERY = 1, CAMERA = 2;
 
-    String name,hint,phone;
-    int hour,min,id;
+    String name,hint,phone,type,edrk,edek,edname;
+    int hour,min,id,year,month,date;
     private TextView etname;
     private EditText ethour;
     private EditText etmin;
+    private EditText etyear;
+    private EditText etmonth;
+    private EditText etdate;
     private EditText ethint;
     private EditText etphone;
     private ImageView imageView;
     private Button btn;
     byte[] bimage;
+    private String edrbid;
+    private String userid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__my_alarm);
         Intent intent = getIntent();
-//
+        type= intent.getStringExtra("TYPE");
+        if(type.equals("myuevent")){
+            edek= intent.getStringExtra("EVENT_KEY");
+            edrk= intent.getStringExtra("ROOM_KEY");
+            edname= intent.getStringExtra("ROOM_NAME");
+            edrbid = intent.getStringExtra("ROOM_BUILDERID");
+        }
         name = intent.getStringExtra("NAME");
         hint = intent.getStringExtra("HINT");
         phone = intent.getStringExtra("PHONE");
         hour = intent.getIntExtra("HOUR",0);
         min = intent.getIntExtra("MIN",0);
+        year = intent.getIntExtra("YEAR",0);
+        month = intent.getIntExtra("MONTH",0);
+        date = intent.getIntExtra("DATE",0);
         bimage = intent.getByteArrayExtra("IMAGE");
-
+        userid = getSharedPreferences("Timi",MODE_PRIVATE)
+                .getString("USERID",null);
         ((TextView) findViewById(R.id.tv_name)).setText(name);
         ((EditText) findViewById(R.id.et_hour)).setText(String.valueOf(hour));
         ((EditText) findViewById(R.id.et_min)).setText(String.valueOf(min));
+        ((EditText) findViewById(R.id.et_year)).setText(String.valueOf(year));
+        ((EditText) findViewById(R.id.et_momth)).setText(String.valueOf(month));
+        ((EditText) findViewById(R.id.et_date)).setText(String.valueOf(date));
         ((EditText) findViewById(R.id.et_hint)).setText(hint);
         ((EditText) findViewById(R.id.et_phone)).setText(phone);
         etname = findViewById(R.id.tv_name);
         ethour = findViewById(R.id.et_hour);
         etmin = findViewById(R.id.et_min);
+        etyear = findViewById(R.id.et_year);
+        etmonth = findViewById(R.id.et_momth);
+        etdate = findViewById(R.id.et_date);
         ethint = findViewById(R.id.et_hint);
         etphone = findViewById(R.id.et_phone);
         Bitmap bmp = BitmapFactory.decodeByteArray(bimage, 0, bimage.length);
@@ -227,25 +255,66 @@ public class Edit_MyAlarmActivity extends AppCompatActivity {
 
         }
     }
+    public void setTime(View view) {
+        TimePickerDialog timePickerDialog =
+                new TimePickerDialog(Edit_MyAlarmActivity.this, new TimePickerDialog.OnTimeSetListener() {
 
+                    @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                String h= String.valueOf(hourOfDay);
+                String m= String.valueOf(minutes);
+
+                ethour.setText(h);
+                etmin.setText(m);
+            }
+        }, hour, min, false);
+        timePickerDialog.show();
+
+    }
+    public void setDate(View view) {
+
+
+
+        new DatePickerDialog(Edit_MyAlarmActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                String yy= String.valueOf(year);
+                String mm= String.valueOf(month+1);
+                String dd= String.valueOf(day);
+
+                etyear.setText(yy);
+                etmonth.setText(mm);
+                etdate.setText(dd);
+            }
+
+        }, year, month-1, date).show();
+
+
+    }
     public void update(View view) {
 
         String name = etname.getText().toString();
         int hour = Integer.parseInt(ethour.getText().toString());
         int min = Integer.parseInt(etmin.getText().toString());
+        int year = Integer.parseInt(etyear.getText().toString());
+        int month = Integer.parseInt(etmonth.getText().toString());
+        int date = Integer.parseInt(etdate.getText().toString());
         String hint = ethint.getText().toString();
         String phone = etphone.getText().toString();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
         image.compress(Bitmap.CompressFormat.PNG, 100, out);
         byte[] bArray = out.toByteArray();
-
+        if(type.equals("myevent")){
         EventHelper helper = new EventHelper(this);
         ContentValues values = new ContentValues();
         values.put("COL_NAME", name);
-        values.put("COL_ACTIVE", true);
+        values.put("COL_ACTIVE", false);//更新完不自動開啟鬧鐘
         values.put("COL_HOUR", hour);
         values.put("COL_MIN", min);
+        values.put("COL_YEAR", year);
+        values.put("COL_MONTH", month);
+        values.put("COL_DATE", date);
         values.put("COL_HINT", hint);
         values.put("COL_PHONE", phone);
         values.put("COL_IMAGE",bArray);
@@ -258,7 +327,33 @@ public class Edit_MyAlarmActivity extends AppCompatActivity {
 
 
         Intent tomain = new Intent(Edit_MyAlarmActivity.this, DailyEventsActivity.class);
-        startActivity(tomain);
+        startActivity(tomain);}
+        else {
+            DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference("users").child(userid).child("rooms");
+            eventRef.child(edrk).child("Events").child(edek).removeValue();
+
+            DatabaseReference eventRef2 = FirebaseDatabase.getInstance().getReference("users").child(userid).child("rooms").child(edrk)
+                    .child("Events").push();
+            Event01 event01 = new Event01();
+            event01.setHour(hour);
+            event01.setMin(min);
+            event01.setName(name);
+            event01.setYear(year);
+            event01.setMonth(month);
+            event01.setDate(date);
+            event01.setHint(hint);
+            event01.setPhone(phone);
+            eventRef2.setValue(event01);
+            String key = eventRef2.getKey();
+            event01.setKey(key);
+            eventRef2.child("key").setValue(key);
+
+            Intent toURoom = new Intent(this, URoomActivity.class);
+            toURoom.putExtra("ROOM_KEY",edrk);
+            toURoom.putExtra("ROOM_NAME",edname);
+            toURoom.putExtra("ROOM_BUILDERID",edrbid);
+            startActivity(toURoom);
+        }
 
     }
 }

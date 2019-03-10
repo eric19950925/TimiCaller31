@@ -2,6 +2,7 @@ package com.eric.timicaller31.DailyEvents;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -18,13 +19,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.eric.timicaller31.DailyEventsActivity;
 import com.eric.timicaller31.R;
 
 public class RingActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_CALL = 5;
     private MediaPlayer mediaPlayer;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class RingActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.irr);
         mediaPlayer.start();
         Intent intent1 = getIntent();
-        String name = intent1.getStringExtra("NAME");
+        name = intent1.getStringExtra("NAME");
         String phone = intent1.getStringExtra("PHONE");
         String hint = intent1.getStringExtra("HINT");
         byte[] bimage = intent1.getByteArrayExtra("IMAGE");
@@ -87,7 +88,11 @@ public class RingActivity extends AppCompatActivity {
     public void stop(View view){
         mediaPlayer.stop();
         finish();
-
+        ContentValues values = new ContentValues();
+        values.put("COL_ACTIVE", false);
+        EventHelper helper = new EventHelper(this);
+        helper.getWritableDatabase().update(
+                "EVENT", values, "COL_NAME =?",new String[]{name});
         Intent intent3=new Intent(this,DailyEventsActivity.class);
         startActivity(intent3);
 

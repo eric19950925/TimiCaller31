@@ -1,33 +1,25 @@
-package com.eric.timicaller31;
+package com.eric.timicaller31.Receipt;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.eric.timicaller31.BuildMyRoom.Detail_UEventActivity;
-import com.eric.timicaller31.BuildMyRoom.URoomActivity;
-import com.eric.timicaller31.ObjectClass.Event01;
 import com.eric.timicaller31.ObjectClass.Receipt;
-import com.eric.timicaller31.ObjectClass.Room;
+import com.eric.timicaller31.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -36,17 +28,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
 
 public class URCRoomActivity extends AppCompatActivity implements ValueEventListener {
     private static final String TAG = URCRoomActivity.class.getSimpleName();
@@ -77,9 +58,9 @@ public class URCRoomActivity extends AppCompatActivity implements ValueEventList
             @Override
             public void onClick(View view) {
                 final EditText ed_title = new EditText(URCRoomActivity.this);
-                new android.app.AlertDialog.Builder(URCRoomActivity.this).setTitle("Add Receipt")
+                new android.app.AlertDialog.Builder(URCRoomActivity.this).setTitle("輸入發票號碼:")
                         .setView(ed_title)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("確定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String rcroomTitle = ed_title.getText().toString();
                                 DatabaseReference rcRef = FirebaseDatabase.getInstance().getReference("rcrooms").child(edrk)
@@ -100,7 +81,7 @@ public class URCRoomActivity extends AppCompatActivity implements ValueEventList
 
 
                             }
-                        }).setNeutralButton("Cancel", null).show();
+                        }).setNeutralButton("取消", null).show();
             }
         });
         FloatingActionButton qrfab = (FloatingActionButton) findViewById(R.id.qrfab);
@@ -205,9 +186,9 @@ public class URCRoomActivity extends AppCompatActivity implements ValueEventList
     }
     public void check(View view){
         final EditText ed_title = new EditText(URCRoomActivity.this);
-        new android.app.AlertDialog.Builder(URCRoomActivity.this).setTitle("Add Check Number ")
+        new android.app.AlertDialog.Builder(URCRoomActivity.this).setTitle("輸入中獎號碼:")
                 .setView(ed_title)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("確認", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         rcroomTitle1 = ed_title.getText().toString();
 
@@ -218,11 +199,12 @@ public class URCRoomActivity extends AppCompatActivity implements ValueEventList
                         Intent toURoom = new Intent(URCRoomActivity.this, URCRoomActivity.class);
                         toURoom.putExtra("ROOM_KEY",edrk);
                         toURoom.putExtra("ROOM_NUM",rcroomTitle1);
+                        toURoom.putExtra("ROOM_NAME",edname);
                         startActivity(toURoom);
 
 
                     }
-                }).setNeutralButton("Cancel", null).show();
+                }).setNeutralButton("取消", null).show();
 
     }
 

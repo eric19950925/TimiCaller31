@@ -1,10 +1,9 @@
-package com.eric.timicaller31;
+package com.eric.timicaller31.Receipt;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 
 import com.eric.timicaller31.ObjectClass.Receipt;
 import com.eric.timicaller31.ObjectClass.Room;
+import com.eric.timicaller31.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -98,8 +98,8 @@ public class QRS_RCActivity extends AppCompatActivity implements ZXingScannerVie
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new android.support.v7.app.AlertDialog.Builder(QRS_RCActivity.this)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
+                .setMessage("發票號碼:"+message)
+                .setPositiveButton("取消", okListener)
                 .setNegativeButton("Cancel", null)
                 .create()
                 .show();
@@ -138,8 +138,8 @@ public class QRS_RCActivity extends AppCompatActivity implements ZXingScannerVie
         Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
 
         builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setTitle("掃描結果");
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -150,7 +150,7 @@ public class QRS_RCActivity extends AppCompatActivity implements ZXingScannerVie
         if(rawResult.getText().length()==19){
             //加入發票
             final String rr = rawResult.getText().substring(7,15);
-            builder.setNeutralButton("Add", new DialogInterface.OnClickListener() {
+            builder.setNeutralButton("加入發票存摺", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
@@ -177,7 +177,7 @@ public class QRS_RCActivity extends AppCompatActivity implements ZXingScannerVie
 
         //其他
         else {
-            builder.setMessage("no");
+            builder.setMessage("錯誤:不是發票號碼!");
             AlertDialog alert1 = builder.create();
             alert1.show();
         }

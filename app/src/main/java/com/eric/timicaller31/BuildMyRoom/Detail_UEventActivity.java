@@ -17,10 +17,8 @@ import android.widget.TextView;
 
 import com.eric.timicaller31.DailyEvents.Edit_MyAlarmActivity;
 import com.eric.timicaller31.DailyEvents.EventHelper;
-import com.eric.timicaller31.DailyEventsActivity;
-import com.eric.timicaller31.NewAlarmActivity;
 import com.eric.timicaller31.R;
-import com.eric.timicaller31.VisitRoomActivity;
+import com.eric.timicaller31.DailyEvents.VisitRoomActivity;
 
 import java.io.ByteArrayOutputStream;
 
@@ -32,6 +30,7 @@ public class Detail_UEventActivity extends AppCompatActivity {
     private EventHelper eventHelper;
     private Button btn ,btnb;
     private String edrname;
+    private String edrbid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +45,11 @@ public class Detail_UEventActivity extends AppCompatActivity {
         edhour = intent.getIntExtra("HOUR",0);
         edmin = intent.getIntExtra("MIN",0);
         edyear = intent.getIntExtra("YEAR",0);
-        edmonth = intent.getIntExtra("MNOTH",0);
+        edmonth = intent.getIntExtra("MONTH",0);
         eddate = intent.getIntExtra("DATE",0);
         edrk = intent.getStringExtra("ROOM_KEY");
         edrname = intent.getStringExtra("ROOM_NAME");
+        edrbid = intent.getStringExtra("ROOM_BUILDERID");
         edek = intent.getStringExtra("EVENT_KEY");
         edverid = intent.getStringExtra("VER_ID");
         if (intent.hasExtra("IMAGE")) {
@@ -105,11 +105,33 @@ public class Detail_UEventActivity extends AppCompatActivity {
         btn = (Button)findViewById(R.id.button4);
         btnb = (Button)findViewById(R.id.button8);
         if(edverid.equals("BUILDER")){
-            btn.setText("edit");
+//            btn.setText("edit");
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                    image.compress(Bitmap.CompressFormat.PNG, 100, out);
+                    byte[] bArray = out.toByteArray();
+                    Intent toedit = new Intent(Detail_UEventActivity.this, Edit_MyAlarmActivity.class);
+                    toedit.putExtra("TYPE", "myuevent");
+                    toedit.putExtra("NAME", edname);
+                    toedit.putExtra("HOUR",edhour);
+                    toedit.putExtra("MIN", edmin);
+                    toedit.putExtra("YEAR", edyear);
+                    toedit.putExtra("MONTH", edmonth);
+                    toedit.putExtra("DATE", eddate);
+                    toedit.putExtra("HINT", edhint);
+                    toedit.putExtra("PHONE", edphone);
+                    toedit.putExtra("PHONE", edphone);
+                    toedit.putExtra("PHONE", edphone);
+                    toedit.putExtra("ROOM_KEY",edrk);
+                    toedit.putExtra("ROOM_NAME",edrname);
+                    toedit.putExtra("ROOM_BUILDERID",edrbid);
+                    toedit.putExtra("EVENT_KEY",edek);
+                    toedit.putExtra("IMAGE", bArray);
 
+                    startActivity(toedit);
                 }
             });
             btnb.setOnClickListener(new View.OnClickListener() {
@@ -117,12 +139,14 @@ public class Detail_UEventActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent b = new Intent(Detail_UEventActivity.this, URoomActivity.class);
                     b.putExtra("ROOM_KEY", edrk);
+                    b.putExtra("ROOM_NAME", edrname);
+                    b.putExtra("ROOM_BUILDERID", edrbid);
                     startActivity(b);
                 }
             });
         }
         else {
-            btn.setText("add");
+            btn.setText("加到個人管理");
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -152,6 +176,7 @@ public class Detail_UEventActivity extends AppCompatActivity {
                     Intent b = new Intent(Detail_UEventActivity.this, VisitRoomActivity.class);
                     b.putExtra("ROOM_KEY", edrk);
                     b.putExtra("ROOM_NAME", edrname);
+                    b.putExtra("ROOM_BUILDERID", edrbid);
                     startActivity(b);
                 }
             });

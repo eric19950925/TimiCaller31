@@ -58,7 +58,7 @@
                 android:layout_marginStart="11dp"
                 android:layout_marginBottom="73dp"
                 android:onClick="back"
-                android:text="back" />
+                android:text="上一頁" />
 
             <Button
                 android:id="@+id/button14"
@@ -73,7 +73,7 @@
                 android:layout_marginBottom="73dp"
                 android:layout_toEndOf="@+id/button12"
                 android:onClick="check"
-                android:text="CHECK" />
+                android:text="兌獎" />
         </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton

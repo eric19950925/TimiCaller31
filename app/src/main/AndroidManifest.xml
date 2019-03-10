@@ -5,6 +5,7 @@
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <!--用于申请调用A-GPS模块-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -14,8 +15,11 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
+        android:name=".DailyEvents.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -25,31 +29,32 @@
         android:usesCleartextTraffic="true"
 
         >
-        <activity android:name=".DailyEventsActivity">
+        <activity android:name=".DailyEvents.DailyEventsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FavoriteRoomActivity" />
-        <activity android:name=".Info.InfoActivity" />
+        <activity android:name=".FavoriteRoom.FavoriteRoomActivity" />
 
         <receiver android:name=".DailyEvents.AlarmReceiver" />
-
+        <service
+            android:name=".DailyEvents.ExampleJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".DailyEvents.NotiService" />
         <activity android:name=".DailyEvents.RingActivity" />
-        <activity android:name=".VisitRoomActivity" />
+        <activity android:name=".DailyEvents.VisitRoomActivity" />
         <activity android:name=".BuildMyRoom.Detail_UEventActivity" />
         <activity android:name=".DailyEvents.Edit_MyAlarmActivity" />
         <activity android:name=".DailyEvents.Detail_MyAlarmActivity" />
         <activity android:name=".BuildMyRoom.URoomActivity" />
-        <activity android:name=".URCRoomActivity" />
-        <activity android:name=".ReceiptActivity" />
-        <activity android:name=".BuildMyRoomActivity" />
+        <activity android:name=".Receipt.URCRoomActivity" />
+        <activity android:name=".Receipt.ReceiptActivity" />
+        <activity android:name=".BuildMyRoom.BuildMyRoomActivity" />
         <activity android:name=".NewAlarmActivity" />
-        <activity android:name=".NewTimerActivity" />
-        <activity android:name=".QRSActivity"></activity>
-        <activity android:name=".QRS_RCActivity"></activity>
+        <activity android:name=".DailyEvents.QRSActivity"></activity>
+        <activity android:name=".Receipt.QRS_RCActivity"></activity>
     </application>
 
 </manifest>

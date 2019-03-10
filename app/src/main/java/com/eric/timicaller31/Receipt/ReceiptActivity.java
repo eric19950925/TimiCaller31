@@ -1,4 +1,4 @@
-package com.eric.timicaller31;
+package com.eric.timicaller31.Receipt;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,7 +19,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.eric.timicaller31.BoNaViewHelper;
 import com.eric.timicaller31.ObjectClass.Room;
+import com.eric.timicaller31.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -47,12 +49,12 @@ public class ReceiptActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final EditText ed_title = new EditText(ReceiptActivity.this);
-                new AlertDialog.Builder(ReceiptActivity.this).setTitle("Add Receipt Room")
+                new AlertDialog.Builder(ReceiptActivity.this).setTitle("建立發票存摺:")
                         .setView(ed_title)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("確認", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String rcroomTitle = ed_title.getText().toString();
-                                DatabaseReference rcroomRef = FirebaseDatabase.getInstance().getReference("rcrooms").push();
+                                DatabaseReference rcroomRef = FirebaseDatabase.getInstance().getReference("users").child(userid).child("rcrooms").push();
                                 Room room = new Room();
                                 room.setTitle(rcroomTitle);
                                 room.setId(userid);
@@ -64,7 +66,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
 
                             }
-                        }).setNeutralButton("Cancel", null).show();
+                        }).setNeutralButton("取消", null).show();
 
             }
         });
@@ -72,7 +74,7 @@ public class ReceiptActivity extends AppCompatActivity {
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(ReceiptActivity.this));
         recyclerView2.getItemAnimator().setRemoveDuration(1000);
-        Query query = FirebaseDatabase.getInstance().getReference("rcrooms").orderByKey();
+        Query query = FirebaseDatabase.getInstance().getReference("users").child(userid).child("rcrooms").orderByKey();
         FirebaseRecyclerOptions<Room> options = new FirebaseRecyclerOptions.Builder<Room>()
                 .setQuery(query, Room.class).build();
         adapter2 = new FirebaseRecyclerAdapter<Room, ReceiptActivity.URoomHolder>(options) {
@@ -127,7 +129,7 @@ public class ReceiptActivity extends AppCompatActivity {
             @NonNull
             @Override
             public ReceiptActivity.URoomHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = getLayoutInflater().inflate(R.layout.item_uroom, viewGroup, false);
+                View view = getLayoutInflater().inflate(R.layout.item_buroom, viewGroup, false);
                 return new URoomHolder(view);
             }
         };

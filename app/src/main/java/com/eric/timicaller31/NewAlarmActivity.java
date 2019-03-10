@@ -28,10 +28,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.eric.timicaller31.BuildMyRoom.URoomActivity;
+import com.eric.timicaller31.DailyEvents.DailyEventsActivity;
 import com.eric.timicaller31.DailyEvents.EventHelper;
 import com.eric.timicaller31.ObjectClass.Event01;
 import com.google.firebase.database.DatabaseReference;
@@ -68,6 +70,8 @@ private static final int REQUEST_GALLARY = 6;
     private EditText etyear;
     private EditText etmonth;
     private EditText etdate;
+    private String edname;
+    private String edrbid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,10 @@ private static final int REQUEST_GALLARY = 6;
         setContentView(R.layout.activity_new_alarm);
         Intent intent = getIntent();
         edrk = intent.getStringExtra("ROOM_KEY");
+        if(!edrk.equals("DailyEvents")){
+            edname = intent.getStringExtra("ROOM_NAME");
+            edrbid = intent.getStringExtra("ROOM_BUILDERID");
+        }
         etname = findViewById(R.id.et_name);
         ethour = findViewById(R.id.et_hour);
         etmin = findViewById(R.id.et_min);
@@ -85,6 +93,13 @@ private static final int REQUEST_GALLARY = 6;
         etdate = findViewById(R.id.et_date);
 
         imageview = (ImageView) findViewById(R.id.iv);
+        ((TextView) findViewById(R.id.et_name)).setText("新提醒");
+        ((EditText) findViewById(R.id.et_hour)).setText(String.valueOf("00"));
+        ((EditText) findViewById(R.id.et_min)).setText(String.valueOf("00"));
+        ((EditText) findViewById(R.id.et_year)).setText(String.valueOf("0000"));
+        ((EditText) findViewById(R.id.et_momth)).setText(String.valueOf("00"));
+        ((EditText) findViewById(R.id.et_date)).setText(String.valueOf("00"));
+        ((EditText) findViewById(R.id.et_hint)).setText("無筆記");
         Resources res=getResources();
         Bitmap bmp=BitmapFactory.decodeResource(res, R.drawable.jungle);
         int width = bmp.getWidth();
@@ -300,7 +315,7 @@ private static final int REQUEST_GALLARY = 6;
                 EventHelper helper = new EventHelper(this);
                 ContentValues values = new ContentValues();
                 values.put("COL_NAME", name);
-                values.put("COL_ACTIVE", true);
+                values.put("COL_ACTIVE", false);//初次設定完，不自動開啟鬧鐘
                 values.put("COL_HOUR", hour);
                 values.put("COL_MIN", min);
                 values.put("COL_YEAR", year);
@@ -315,7 +330,7 @@ private static final int REQUEST_GALLARY = 6;
                 startActivity(toDaily);
             }
             else {
-                DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference("rooms").child(edrk)
+                DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference("users").child(userid).child("rooms").child(edrk)
                         .child("Events").push();
 
                 Event01 event01 = new Event01();
@@ -325,12 +340,16 @@ private static final int REQUEST_GALLARY = 6;
                 event01.setYear(year);
                 event01.setMonth(month);
                 event01.setDate(date);
+                event01.setHint(hint);
+                event01.setPhone(phone);
                 eventRef.setValue(event01);
                 String key = eventRef.getKey();
                 event01.setKey(key);
                 eventRef.child("key").setValue(key);
                 Intent toURoom = new Intent(this, URoomActivity.class);
                 toURoom.putExtra("ROOM_KEY",edrk);
+                toURoom.putExtra("ROOM_NAME",edname);
+                toURoom.putExtra("ROOM_BUILDERID",edrbid);
                 startActivity(toURoom);
             }
         }

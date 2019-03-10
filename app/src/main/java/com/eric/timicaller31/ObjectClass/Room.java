@@ -4,7 +4,7 @@ public class Room {
     String id;
     String title;
     String key;
-    String num;//
+    String num;
 
     public String getNum() {
         return num;
@@ -13,7 +13,6 @@ public class Room {
     public void setNum(String num) {
         this.num = num;
     }
-
 
     public String getKey() {
         return key;

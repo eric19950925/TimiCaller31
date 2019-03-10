@@ -1,6 +1,7 @@
-package com.eric.timicaller31;
+package com.eric.timicaller31.DailyEvents;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,17 +13,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.SparseArray;
 import android.widget.Toast;
 
 import com.eric.timicaller31.ObjectClass.Room;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.eric.timicaller31.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
@@ -37,6 +34,8 @@ public class QRSActivity extends AppCompatActivity implements ZXingScannerView.R
     ZXingScannerView zXingScannerView;
     private Room room01;
     private AlertDialog.Builder builder;
+    String userid;
+    private String result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +55,8 @@ public class QRSActivity extends AppCompatActivity implements ZXingScannerView.R
 
             }
         }
+        userid = this.getSharedPreferences("Timi", Context.MODE_PRIVATE)
+                .getString("USERID", "");
     }
     private boolean checkPermission() {
         return ( ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA ) == PackageManager.PERMISSION_GRANTED); }
@@ -130,25 +131,12 @@ public class QRSActivity extends AppCompatActivity implements ZXingScannerView.R
     @Override
     public void handleResult(Result rawResult) {
 //        String RN = room01.getTitle();
-//        Toast.makeText(this, RN , Toast.LENGTH_LONG).show();
-        final String result = rawResult.getText();
-
-        Log.d("QRCodeScanner", rawResult.getText());
+//        Toast.makeText(this, rawResult.getText() , Toast.LENGTH_LONG).show();
         Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
-
-        builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                zXingScannerView.resumeCameraPreview(QRSActivity.this);
-            }
-        });
-
+        result = rawResult.getText();
         if(rawResult.getText().indexOf(".")!=-1){
             //拜訪網站
-            builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
+            builder.setNeutralButton("以瀏覽器開啟", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
@@ -161,29 +149,77 @@ public class QRSActivity extends AppCompatActivity implements ZXingScannerView.R
             alert1.show();
         }
         else if(rawResult.getText().indexOf("*")!=-1){
-            //購買商品
-            builder.setMessage("購買商品"+rawResult.getText());
+            builder = new AlertDialog.Builder(this);
+            builder.setMessage(result);
+            builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    zXingScannerView.resumeCameraPreview(QRSActivity.this);
+                }
+            });
+            AlertDialog alert1 = builder.create();
+            alert1.show();
+        }
+        else if(rawResult.getText().length()==19){
+            builder = new AlertDialog.Builder(this);
+            builder.setMessage("發票號碼:"+result);
+            builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    zXingScannerView.resumeCameraPreview(QRSActivity.this);
+                }
+            });
             AlertDialog alert1 = builder.create();
             alert1.show();
         }
         //進入房間
         else {
-            DatabaseReference RF = FirebaseDatabase.getInstance().getReference("rooms").child(rawResult.getText());
+            String RR[] = {"", ""};
+            int i = 0;
+            String[] separated = result.split(":");
+            for (String token : separated) {
 
-            builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
+                RR[i] = token;
+
+                i++;
+            }
+            Log.d("rK", RR[0]);
+            Log.d("rBID", RR[1]);
+
+            Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
+
+            todailog(RR[0], RR[1]);
+        }
+    }
+
+    private void todailog(final String RK, final String RBID) {
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle("掃描結果");
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                zXingScannerView.resumeCameraPreview(QRSActivity.this);
+            }
+        });
+
+//            DatabaseReference RF = FirebaseDatabase.getInstance().getReference("users").child(userid).child("rooms").child(rawResult.getText());
+//            Log.d("rk", room01.getKey());
+            builder.setNeutralButton("瀏覽", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent vr = new Intent(QRSActivity.this, VisitRoomActivity.class);
-                vr.putExtra("ROOM_KEY",room01.getKey());
+                vr.putExtra("ROOM_KEY",RK);
                 vr.putExtra("ROOM_NAME",room01.getTitle());
+                vr.putExtra("ROOM_BUILDERID",RBID);
                 startActivity(vr);
             }
         });
-        FirebaseDatabase.getInstance().getReference("rooms").child(rawResult.getText())
+        FirebaseDatabase.getInstance().getReference("users").child(RBID).child("rooms").child(RK)
                     .addValueEventListener(this);
-        }
-
 
     }
 
@@ -192,7 +228,7 @@ public class QRSActivity extends AppCompatActivity implements ZXingScannerView.R
         room01 = dataSnapshot.getValue(Room.class);
         String RN = room01.getTitle();
 //        Toast.makeText(this, RN , Toast.LENGTH_LONG).show();
-        builder.setMessage("Do you want to visit room : "+RN+" ?");
+        builder.setMessage("您要瀏覽公佈欄 : "+RN+" 嗎?");
         AlertDialog alert1 = builder.create();
         alert1.show();
     }

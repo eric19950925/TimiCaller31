@@ -19,7 +19,7 @@ import java.io.ByteArrayOutputStream;
 
 public class Detail_MyAlarmActivity extends AppCompatActivity {
     String edname,edhint,edphone;
-    int edhour,edmin;
+    int edhour,edmin,edyear,edmonth,eddate;
     byte[] bimage;
     ImageView imageView;
     private EventHelper eventHelper;
@@ -36,6 +36,9 @@ public class Detail_MyAlarmActivity extends AppCompatActivity {
         edphone = intent.getStringExtra("PHONE");
         edhour = intent.getIntExtra("HOUR",0);
         edmin = intent.getIntExtra("MIN",0);
+        edyear = intent.getIntExtra("YEAR",0);
+        edmonth = intent.getIntExtra("MONTH",0);
+        eddate = intent.getIntExtra("DATE",0);
         if (intent.hasExtra("IMAGE")) {
             bimage = intent.getByteArrayExtra("IMAGE");
             Bitmap bmp = BitmapFactory.decodeByteArray(bimage, 0, bimage.length);
@@ -83,6 +86,9 @@ public class Detail_MyAlarmActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.phone)).setText(edphone);
         ((TextView)findViewById(R.id.hour)).setText(String.valueOf(edhour));
         ((TextView)findViewById(R.id.min)).setText(String.valueOf(edmin));
+        ((TextView)findViewById(R.id.year)).setText(String.valueOf(edyear));
+        ((TextView)findViewById(R.id.month)).setText(String.valueOf(edmonth));
+        ((TextView)findViewById(R.id.date)).setText(String.valueOf(eddate));
     }
 
 
@@ -92,10 +98,13 @@ public class Detail_MyAlarmActivity extends AppCompatActivity {
         image.compress(Bitmap.CompressFormat.PNG, 100, out);
         byte[] bArray = out.toByteArray();
         Intent toedit = new Intent(Detail_MyAlarmActivity.this, Edit_MyAlarmActivity.class);
-
+        toedit.putExtra("TYPE", "myevent");
         toedit.putExtra("NAME", edname);
         toedit.putExtra("HOUR",edhour);
         toedit.putExtra("MIN", edmin);
+        toedit.putExtra("YEAR", edyear);
+        toedit.putExtra("MONTH", edmonth);
+        toedit.putExtra("DATE", eddate);
         toedit.putExtra("HINT", edhint);
         toedit.putExtra("PHONE", edphone);
         toedit.putExtra("IMAGE", bArray);

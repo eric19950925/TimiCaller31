@@ -1,4 +1,4 @@
-package com.eric.timicaller31;
+package com.eric.timicaller31.BuildMyRoom;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,8 +20,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.eric.timicaller31.BuildMyRoom.URoomActivity;
+import com.eric.timicaller31.BoNaViewHelper;
 import com.eric.timicaller31.ObjectClass.Room;
+import com.eric.timicaller31.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseUser;
@@ -54,12 +55,12 @@ public class BuildMyRoomActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final EditText ed_title = new EditText(BuildMyRoomActivity.this);
-                new AlertDialog.Builder(BuildMyRoomActivity.this).setTitle("Room title")
+                new AlertDialog.Builder(BuildMyRoomActivity.this).setTitle("建立公佈欄:")
                         .setView(ed_title)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("確認", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String roomTitle = ed_title.getText().toString();
-                                DatabaseReference roomRef = FirebaseDatabase.getInstance().getReference("rooms").push();
+                                DatabaseReference roomRef = FirebaseDatabase.getInstance().getReference("users").child(userid).child("rooms").push();
                                 Room room = new Room();
                                 room.setTitle(roomTitle);
                                 room.setId(userid);
@@ -70,14 +71,14 @@ public class BuildMyRoomActivity extends AppCompatActivity {
 
 
                             }
-                        }).setNeutralButton("Cancel", null).show();
+                        }).setNeutralButton("取消", null).show();
             }
         });
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(BuildMyRoomActivity.this));
         recyclerView.getItemAnimator().setRemoveDuration(1000);
-        Query query = FirebaseDatabase.getInstance().getReference("rooms").orderByKey();
+        Query query = FirebaseDatabase.getInstance().getReference("users").child(userid).child("rooms").orderByKey();
         FirebaseRecyclerOptions<Room> options = new FirebaseRecyclerOptions.Builder<Room>()
                 .setQuery(query, Room.class).build();
         adapter = new FirebaseRecyclerAdapter<Room, URoomHolder>(options) {
@@ -93,6 +94,7 @@ public class BuildMyRoomActivity extends AppCompatActivity {
                         Intent into_uroom = new Intent(getApplicationContext(),URoomActivity.class);
                         into_uroom.putExtra("ROOM_KEY",room_key);
                         into_uroom.putExtra("ROOM_NAME",model.getTitle());
+                        into_uroom.putExtra("ROOM_BUILDERID",model.getTitle());
                         startActivity(into_uroom);
                     }
                 });
@@ -100,11 +102,11 @@ public class BuildMyRoomActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(BuildMyRoomActivity.this);
-                        alertDialogBuilder.setTitle("Delete this room?");
+                        alertDialogBuilder.setTitle("確認刪除此公佈欄?");
                         alertDialogBuilder
-                                .setMessage("Click yes to delete!")
+                                .setMessage("按下確認以刪除!")
                                 .setCancelable(false)
-                                .setPositiveButton("Yes",
+                                .setPositiveButton("確認",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 DatabaseReference roomRef1 = FirebaseDatabase.getInstance().getReference("rooms");
@@ -113,7 +115,7 @@ public class BuildMyRoomActivity extends AppCompatActivity {
                                             }
                                         })
 
-                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
 
                                         dialog.cancel();
@@ -129,7 +131,7 @@ public class BuildMyRoomActivity extends AppCompatActivity {
             @NonNull
             @Override
             public URoomHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = getLayoutInflater().inflate(R.layout.item_uroom,viewGroup,false);
+                View view = getLayoutInflater().inflate(R.layout.item_buroom,viewGroup,false);
                 return new URoomHolder(view);
 
             }

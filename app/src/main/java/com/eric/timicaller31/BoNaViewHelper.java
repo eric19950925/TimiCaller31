@@ -6,6 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
+import com.eric.timicaller31.BuildMyRoom.BuildMyRoomActivity;
+import com.eric.timicaller31.DailyEvents.DailyEventsActivity;
+import com.eric.timicaller31.FavoriteRoom.FavoriteRoomActivity;
+import com.eric.timicaller31.Receipt.ReceiptActivity;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class BoNaViewHelper {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DailyEventsActivity">
+    tools:context=".DailyEvents.DailyEventsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -74,6 +74,19 @@
                 tools:layout_editor_absoluteY="434dp" />
 
             <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="206dp"
+                android:layout_marginBottom="130dp"
+                android:text="位置追蹤"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="297dp"
+                tools:layout_editor_absoluteY="434dp" />
+
+            <TextView
                 android:id="@+id/textView31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,6 +124,20 @@
             app:layout_constraintHorizontal_bias="0.962"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/icons8_plus_math" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/qrloca2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="206dp"
+            android:layout_marginBottom="77dp"
+            android:clickable="true"
+            app:backgroundTint="@color/browser_actions_bg_grey"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/place_marker" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/qrloca"
