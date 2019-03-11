@@ -24,8 +24,8 @@ import android.util.Log;
 
 import java.util.Calendar;
 
-public class ExampleJobService extends JobService{
-    private static final String TAG = "ExampleJobService";
+public class LocationJobService extends JobService{
+    private static final String TAG = "LocationJobService";
     private boolean jobCancelled = false;
     private LocationManager lms;
     private String bestProvider;    //最佳資訊提供者
@@ -74,9 +74,9 @@ public class ExampleJobService extends JobService{
 
 //                    upload("122", "25", "5");
 
-//                    Intent serviceIntent = new Intent(ExampleJobService.this, NotiService.class);
+//                    Intent serviceIntent = new Intent(LocationJobService.this, NotiService.class);
 //                    serviceIntent.putExtra("inputExtra", "抓取位置資訊");
-//                    ContextCompat.startForegroundService(ExampleJobService.this, serviceIntent);
+//                    ContextCompat.startForegroundService(LocationJobService.this, serviceIntent);
 
                     try {
                         Thread.sleep(60000);
@@ -139,9 +139,9 @@ public class ExampleJobService extends JobService{
         //int speed = info.getLinkSpeed();
         rssi = info.getRssi();
         if(rssi <-70){
-//            Toast.makeText(ExampleJobService.this, "rssi:"+rssi, Toast.LENGTH_LONG).show();
+//            Toast.makeText(LocationJobService.this, "rssi:"+rssi, Toast.LENGTH_LONG).show();
 
-//            new AlertDialog.Builder(ExampleJobService.this).setTitle("即將失去網路連線，請往訊號良好之處移動!")
+//            new AlertDialog.Builder(LocationJobService.this).setTitle("即將失去網路連線，請往訊號良好之處移動!")
 //                    .setPositiveButton("我知道了", null).show();
             Intent serviceIntent = new Intent(this, NotiService.class);
             serviceIntent.putExtra("inputExtra", "即將失去連線，請網訊號良好處移動");

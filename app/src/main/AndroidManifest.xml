@@ -40,7 +40,7 @@
 
         <receiver android:name=".DailyEvents.AlarmReceiver" />
         <service
-            android:name=".DailyEvents.ExampleJobService"
+            android:name=".DailyEvents.LocationJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service android:name=".DailyEvents.NotiService" />
         <activity android:name=".DailyEvents.RingActivity" />

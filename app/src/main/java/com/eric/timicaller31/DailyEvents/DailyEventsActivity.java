@@ -24,14 +24,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -234,7 +232,7 @@ public class DailyEventsActivity extends AppCompatActivity implements FirebaseAu
 
     }//end of onCreate
     public void scheduleJob() {
-        ComponentName componentName = new ComponentName(this, ExampleJobService.class);
+        ComponentName componentName = new ComponentName(this, LocationJobService.class);
         JobInfo info = new JobInfo.Builder(123, componentName)
 //                .setRequiresCharging(false)// 裝置不須充電
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)// 連接任何網路
