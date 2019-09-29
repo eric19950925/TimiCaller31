@@ -18,6 +18,4 @@ welcome~<br/>
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/015.PNG" width="300" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/016.PNG" width="300" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/017.PNG" width="300" />
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/018.PNG" width="300" />
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/019.PNG" width="300" />
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/020.PNG" width="300" />
+
