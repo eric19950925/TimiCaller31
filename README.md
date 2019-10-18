@@ -1,9 +1,4 @@
 # TimiCaller31
-目錄
-### * 作品理念與開發過程
-###  * 系統架構 
-### * 各項功能介紹 
-
 ### * 作品理念與開發過程
 初始發想是具有鬧鐘功能的代辦事項清單，後加入事項公佈欄、位置歷史紀錄、發票兌獎等功能。<br/>
 >過程中學習到:
@@ -17,10 +12,10 @@
 ### * 各項功能介紹 
 <br/>
 <br/>
-帳號登入功能<br/>
+>帳號登入功能<br/>
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/207366.jpg" width="250" />
 <br/>
-代辦事項的鬧鐘畫面與撥出電話快捷功能
+>代辦事項的鬧鐘畫面與撥出電話快捷功能
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/002.PNG" width="600" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/003.PNG" width="300" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/004.PNG" width="300" />
