@@ -7,9 +7,10 @@
 >>。資料庫管理應用<br/>
 ###  * 系統架構 
 <br/>
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/001.PNG" width="300" />
+<img src="https://github.com/eric84925/TimiCaller31/blob/master/001.PNG" width="600" />
+<br/>
 ###  * 各項功能介紹
-welcome~<br/>
+<br/>
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/207366.jpg" width="300" />
 
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/002.PNG" width="300" />
