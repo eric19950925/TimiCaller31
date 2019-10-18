@@ -8,11 +8,15 @@
 ###  * 系統架構 
 <br/>
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/001.PNG" width="600" />
-<br/>
-###  * 各項功能介紹 
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/207366.jpg" width="300" />
 
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/002.PNG" width="300" />
+### * 各項功能介紹 
+<br/>
+<br/>
+帳號登入功能<br/>
+<img src="https://github.com/eric84925/TimiCaller31/blob/master/207366.jpg" width="250" />
+<br/>
+代辦事項的鬧鐘畫面與撥出電話快捷功能
+<img src="https://github.com/eric84925/TimiCaller31/blob/master/002.PNG" width="600" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/003.PNG" width="300" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/004.PNG" width="300" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/005.PNG" width="300" />
