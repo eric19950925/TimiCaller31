@@ -9,8 +9,7 @@
 <br/>
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/001.PNG" width="600" />
 <br/>
-###  * 系統架構 
-###  * 各項功能介紹 
+###  * 各項功能介紹
 <br/>
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/207366.jpg" width="300" />
 
