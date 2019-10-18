@@ -16,6 +16,10 @@
 >代辦事項的鬧鐘畫面與撥出電話快捷功能
 
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/002.PNG" width="600" />
+
+>鬧鐘開發介紹
+<img src="https://github.com/eric84925/TimiCaller31/blob/master/017.PNG" width="600" />
+
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/003.PNG" width="300" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/004.PNG" width="300" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/005.PNG" width="300" />
@@ -30,5 +34,5 @@
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/014.PNG" width="300" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/015.PNG" width="300" />
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/016.PNG" width="300" />
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/017.PNG" width="300" />
+
 
