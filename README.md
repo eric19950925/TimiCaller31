@@ -27,7 +27,9 @@
 >事項公佈欄功能
 >>新增公佈欄事項、提供QRcode給他人掃描查看
 >><img src="https://github.com/eric84925/TimiCaller31/blob/master/011.PNG" width="750" />
+>>訪問者掃描QRcode，查看公佈欄
 >><img src="https://github.com/eric84925/TimiCaller31/blob/master/012.PNG" width="750" />
+>>訪問者將公佈欄的事項儲存至自己的代辦事項清單
 >><img src="https://github.com/eric84925/TimiCaller31/blob/master/013.PNG" width="750" />
 
 
