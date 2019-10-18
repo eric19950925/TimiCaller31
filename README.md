@@ -25,9 +25,9 @@
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/014.PNG" width="600" />
 
 >事項公佈欄功能
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/011.PNG" width="600" />
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/012.PNG" width="600" />
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/013.PNG" width="600" />
+>><img src="https://github.com/eric84925/TimiCaller31/blob/master/011.PNG" width="600" />
+>><img src="https://github.com/eric84925/TimiCaller31/blob/master/012.PNG" width="600" />
+>><img src="https://github.com/eric84925/TimiCaller31/blob/master/013.PNG" width="600" />
 
 
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/003.PNG" width="300" />
