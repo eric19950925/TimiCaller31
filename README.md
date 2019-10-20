@@ -2,9 +2,9 @@
 ### * 作品理念與開發過程
 初始發想是具有鬧鐘功能的代辦事項清單，後加入事項公佈欄、位置歷史紀錄、發票兌獎等功能。<br/>
 #### 過程中學習到:
-    。api的使用<br/>
-    。android版本的差異<br/>
-    。資料庫管理應用<br/>
+    。api的使用
+    。android版本的差異
+    。資料庫管理應用
 ###  * 系統架構 
 <br/>
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/001.PNG" width="750" />
@@ -56,7 +56,7 @@
 > 
 >逾時狀況處理程序
 > 
-><img src="https://github.com/eric84925/TimiCaller31/blob/master/005.PNG" width="400" />
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/005.PNG" width="250" />
 > 
 >逾時狀況監控頁面
 > 
