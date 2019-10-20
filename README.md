@@ -40,13 +40,13 @@
 #### 位置歷史紀錄功能
 >資料庫使用
 > 
-<img src="https://github.com/eric84925/TimiCaller31/blob/master/015.PNG" width="750" />
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/015.PNG" width="750" />
 > 
 >資料庫(Mysql)
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/003.PNG" width="750" />
 > 
->>資料庫(Firebase)
+>資料庫(Firebase)
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/009.PNG" width="300" />
 > 
