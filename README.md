@@ -45,24 +45,31 @@
 >資料庫(Mysql)
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/003.PNG" width="750" />
->資料庫(Firebase)
+> 
+>>資料庫(Firebase)
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/009.PNG" width="300" />
+> 
 >位置儲存與例外處理程序
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/004.PNG" width="750" />
+> 
 >逾時狀況處理程序
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/005.PNG" width="400" />
+> 
 >逾時狀況監控頁面
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/006.PNG" width="750" />
+> 
 >紀錄逾時狀況
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/007.PNG" width="750" />
+> 
 >網路訊號良好時，成功上傳資料
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/008.PNG" width="300" />
+> 
 >訊號不良，通知使用者移動至網路訊號良好處
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/010.PNG" width="300" />
