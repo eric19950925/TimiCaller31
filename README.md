@@ -36,29 +36,37 @@
 >訪問者將公佈欄的事項儲存至自己的代辦事項清單
 > 
 ><img src="https://github.com/eric84925/TimiCaller31/blob/master/013.PNG" width="750" />
-<br/>
+
 #### 位置歷史紀錄功能
-<br/>
 >資料庫使用
+> 
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/015.PNG" width="750" />
-<br/>
+> 
 >資料庫(Mysql)
->><br/><img src="https://github.com/eric84925/TimiCaller31/blob/master/003.PNG" width="750" />
->><br/>資料庫(Firebase)
->><br/><img src="https://github.com/eric84925/TimiCaller31/blob/master/009.PNG" width="300" />
->><br/>位置儲存與例外處理程序
->><br/><img src="https://github.com/eric84925/TimiCaller31/blob/master/004.PNG" width="750" />
->><br/>逾時狀況處理程序
->><br/><img src="https://github.com/eric84925/TimiCaller31/blob/master/005.PNG" width="400" />
->><br/>逾時狀況監控頁面
->><br/><img src="https://github.com/eric84925/TimiCaller31/blob/master/006.PNG" width="750" />
->><br/>紀錄逾時狀況
->><br/><img src="https://github.com/eric84925/TimiCaller31/blob/master/007.PNG" width="750" />
->><br/>網路訊號良好時，成功上傳資料
->><br/><img src="https://github.com/eric84925/TimiCaller31/blob/master/008.PNG" width="300" />
->><br/>訊號不良，通知使用者移動至網路訊號良好處
->><br/><img src="https://github.com/eric84925/TimiCaller31/blob/master/010.PNG" width="300" />
->><br/>
+> 
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/003.PNG" width="750" />
+>資料庫(Firebase)
+> 
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/009.PNG" width="300" />
+>位置儲存與例外處理程序
+> 
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/004.PNG" width="750" />
+>逾時狀況處理程序
+> 
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/005.PNG" width="400" />
+>逾時狀況監控頁面
+> 
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/006.PNG" width="750" />
+>紀錄逾時狀況
+> 
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/007.PNG" width="750" />
+>網路訊號良好時，成功上傳資料
+> 
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/008.PNG" width="300" />
+>訊號不良，通知使用者移動至網路訊號良好處
+> 
+><img src="https://github.com/eric84925/TimiCaller31/blob/master/010.PNG" width="300" />
+
 <img src="https://github.com/eric84925/TimiCaller31/blob/master/016.PNG" width="750" />
 
 
